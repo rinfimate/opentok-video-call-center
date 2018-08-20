@@ -396,11 +396,11 @@ const authCheck = jwt({
         cache: true,
         rateLimit: true,
         jwksRequestsPerMinute: 5,
-        jwksUri: "https:///.well-known/jwks.json"
+        jwksUri: "https://" + AUTH0_DOMAIN +"/.well-known/jwks.json"
     }),
     audience: AUTH0_API_IDENTIFIER,
     issuer: AUTH0_DOMAIN,
-    algorithms: ['RS256']
+    algorithms: ['RS256']                                           //Assuming RS256 Algo
 });
 
 // --- REST endpoints ---
