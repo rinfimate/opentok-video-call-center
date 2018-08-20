@@ -7,7 +7,7 @@ import Agent from './components/agent'
 import Caller from './components/caller'
 import EndCall from './components/end-call'
 import Callback from './components/callback'
-import { requireAuth } from '../../utils/auth'
+import { requireAuth } from '../utils/auth'
 
 Vue.use(VueRouter)
 
