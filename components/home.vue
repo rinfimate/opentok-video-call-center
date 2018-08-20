@@ -1,5 +1,6 @@
 <template>
   <div>
+    <app-nav></app-nav>
     <div class="uk-section uk-section-primary">
       <div class="uk-container uk-text-center">
         <h1 class="uk-margin-large-top">OpenTok Call Center Demo</h1>
@@ -20,3 +21,6 @@
     </div>
   </div>
 </template>
+<script>
+import AppNav from './app-nav';
+</script>

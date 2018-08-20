@@ -400,7 +400,7 @@ const authCheck = jwt({
     }),
     audience: AUTH0_API_IDENTIFIER,
     issuer: AUTH0_DOMAIN,
-    algorithms: ['RS256']                                           //Assuming RS256 Algo
+    algorithms: ['RS256']
 });
 
 // --- REST endpoints ---
