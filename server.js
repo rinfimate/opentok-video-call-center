@@ -22,6 +22,20 @@ if (!OPENTOK_API_SECRET) {
   throw new Error('Provide OPENTOK_API_SECRET environment variable')
 }
 
+// Set OPENTOK_API_SECRET from environment variable
+// Exit with error if the environment variable is not specified.
+const AUTH0_DOMAIN = process.env.AUTH0_DOMAIN
+if (!AUTH0_DOMAIN) {
+  throw new Error('Provide AUTH0_DOMAIN environment variable')
+}
+
+// Set OPENTOK_API_SECRET from environment variable
+// Exit with error if the environment variable is not specified.
+const AUTH0_API_IDENTIFIER = process.env.AUTH0_API_IDENTIFIER
+if (!AUTH0_API_IDENTIFIER) {
+  throw new Error('Provide AUTH0_API_IDENTIFIER environment variable')
+}
+
 // --- In-memory data store ---
 //
 // An actual application will use databases to store these information. This demo does not go into those complexities by
@@ -375,6 +389,18 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // Mount the `./public` dir to web-root as static.
 app.use('/', express.static('./public'))
 
+const authCheck = jwt({
+  secret: jwks.expressJwtSecret({
+        cache: true,
+        rateLimit: true,
+        jwksRequestsPerMinute: 5,
+        jwksUri: "https:///.well-known/jwks.json"
+    }),
+    audience: AUTH0_API_IDENTIFIER,
+    issuer: AUTH0_DOMAIN,
+    algorithms: ['RS256']
+});
+
 // --- REST endpoints ---
 
 /**
@@ -413,7 +439,7 @@ app.post('/dial', (req, res, next) => {
  *
  * Used by agents to mark that they have joined a caller.
  */
-app.get('/call/:id/join', (req, res, next) => {
+app.get('/call/:id/join', authCheck, (req, res, next) => {
   const c = callers.get(req.params.id)
   if (!c) {
     const e = new Error(`Caller ID ${req.params.id} not found`)

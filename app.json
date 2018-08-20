@@ -10,6 +10,14 @@
     "OPENTOK_API_SECRET": {
       "description": "API secret from OpeTok",
       "required": true
+    },
+    "AUTH0_DOMAIN": {
+      "description": "Auth0 Application Domain",
+      "required": true
+    },
+    "AUTH0_API_IDENTIFIER": {
+      "description": "Auth0 API Identifier",
+      "required": true
     }
   },
   "formation": {},
