@@ -1,6 +1,8 @@
 // Server script for the call center demo
 
 const express = require('express')
+const jwt = require('express-jwt')
+const jwks = require('jwks-rsa')
 const OpenTok = require('opentok')
 const compression = require('compression')
 const bodyParser = require('body-parser')
